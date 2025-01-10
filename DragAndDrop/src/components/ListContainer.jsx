@@ -1,6 +1,18 @@
 import React, { useState } from "react";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
 import TaskList from "./TaskList";
-import { DndContext } from "@dnd-kit/core";
 
 const listData = [
   { id: 1, name: "Task 1", description: "Complete the project documentation" },
@@ -11,40 +23,47 @@ const listData = [
   { id: 6, name: "Task 6", description: "Write unit tests for new features" },
   { id: 7, name: "Task 7", description: "Analyze user feedback" }
 ];
+
 const ListContainer = () => {
   const [list, setList] = useState(listData);
 
+  // Sensors for drag-and-drop (pointer for mouse, keyboard for accessibility)
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor)
+  );
+
+  // Handle drag end event
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
-    const reorderList = (oldIndex, newIndex) => {
-      const updatedList = Array.from(list);
-      const [removed] = updatedList.splice(oldIndex, 1);
-      updatedList.splice(newIndex, 0, removed);
-      return updatedList;
-    };
-
-    if (over && active.id !== over.id) {
-      setList((list) => {
-        const oldIndex = list.findIndex((item) => item.id === active.id);
-        const newIndex = list.findIndex((item) => item.id === over.id);
-        return reorderList(oldIndex, newIndex);
+    if (active.id !== over.id) {
+      setList((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
       });
     }
   };
 
   return (
-    <div className="w-full max-w-md bg-white shadow-md rounded-lg p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+    <div className="w-full max-w-md mx-auto bg-white shadow-lg rounded-xl p-6">
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
         Task List
       </h1>
-      <ul className="flex flex-col gap-3">
-        <DndContext onDragEnd={handleDragEnd}>
-          {list.map((item) => (
-            <TaskList {...item} key={item.id} />
-          ))}
-        </DndContext>
-      </ul>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={list} strategy={verticalListSortingStrategy}>
+          <ul className="space-y-3">
+            {list.map((item) => (
+              <TaskList key={item.id} {...item} />
+            ))}
+          </ul>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 };
