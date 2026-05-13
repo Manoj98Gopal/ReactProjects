@@ -11,7 +11,9 @@ const HomePage = () => {
   const [count, setCount] = useState(0);
   const [toggle, setToggle] = useState(false);
 
-  //   console.log("Parent Rendering");
+  console.log("Parent Rendering");
+
+
 
   const user = useMemo(() => {
     return {
