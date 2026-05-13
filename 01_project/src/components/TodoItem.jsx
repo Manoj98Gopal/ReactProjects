@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodoItem = ({ todo, onDelete }) => {
-  console.log("children render");
+  // console.log("children render");
 
   return (
     <div className="flex gap-4">

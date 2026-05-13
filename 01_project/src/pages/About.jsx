@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import TodoItem from "../components/TodoItem";
 
 const About = () => {
@@ -15,7 +15,15 @@ const About = () => {
   //   ];
   //   },[])
 
-  console.log("Parent Render");
+  // console.log("Parent Render");
+
+  useEffect(() => {
+    console.log("useEffect count :", count);
+
+    return () => {
+      console.log("clean up function", count);
+    };
+  }, []);
 
   const handleDelete = useCallback((id) => {
     console.log("deleted ", id);
@@ -27,6 +35,8 @@ const About = () => {
 
   return (
     <div className="space-y-4">
+      <h1 className="text-xl font-bold">UseCallback and useMemo hooks uses</h1>
+
       <h1>Count : {count}</h1>
       <button
         onClick={() => {
