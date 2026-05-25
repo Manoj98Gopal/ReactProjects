@@ -9,7 +9,7 @@ function Header() {
   ];
 
   return (
-    <header className="border-b border-slate-200 bg-white">
+    <header className="border-b border-slate-200 bg-white fixed top-0 left-0 right-0 z-20">
       <nav className="mx-auto flex max-w-[80%] items-center justify-between px-6 py-4">
         <Link to="/" className="text-2xl font-bold text-slate-900">
           Logo

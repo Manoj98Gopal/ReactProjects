@@ -5,12 +5,16 @@ const ProjectData = [
   {
     title: "Closures & Stale Closures",
     link: "/projects/closures-and-stale-closures"
+  },
+    {
+    title: "Custom Hooks",
+    link: "/projects/custom-hooks"
   }
 ];
 
 const Projects = () => {
   return (
-    <div>
+    <div className="pt-14">
       {ProjectData?.map((data, idx) => {
         return (
           <div key={data.link} className="flex gap-2 items-center">
