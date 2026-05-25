@@ -18,13 +18,10 @@ const CustomHooks = () => {
   const debouncedSearch = useDebounce(search, 500);
   const skip = (page - 1) * LIMIT;
 
-  const queryParams = useMemo(() => {
-    const searchText = debouncedSearch.trim();
-
-    return debouncedSearch.trim()
-      ? `${url}/search?q=${searchText}&limit=${LIMIT}&skip=${skip}`
-      : `${url}?limit=${LIMIT}&skip=${skip}`;
-  }, [debouncedSearch, skip]);
+  const searchText = debouncedSearch.trim();
+  const queryParams = searchText
+    ? `${url}/search?q=${encodeURIComponent(searchText)}&limit=${LIMIT}&skip=${skip}`
+    : `${url}?limit=${LIMIT}&skip=${skip}`;
 
   const { data, error, loading } = useFetch(queryParams, options);
 
