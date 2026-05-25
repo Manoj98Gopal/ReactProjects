@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard, { ProductCardSkeleton } from "../components/ProductCard";
 import useFetch from "../hooks/useFetch";
 import useDebounce from "../hooks/useDebounce";
@@ -45,12 +45,87 @@ const CustomHooks = () => {
   }
 
   return (
-    <div className="pt-14">
+    <div className="pt-6">
+      <div className="mb-8">
+        <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+          React Hooks
+        </p>
+        <h1 className="mt-2 text-3xl font-bold text-slate-950">
+          Custom Hooks
+        </h1>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          A custom hook is a normal JavaScript function that starts with "use".
+          It lets us move reusable React logic out of a component.
+        </p>
+      </div>
+
+      <section className="mb-8 grid gap-4 lg:grid-cols-3">
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Problem</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Fetching data inside every component creates repeated code for
+            loading, errors, cleanup, and response handling.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Example</h2>
+          <pre className="mt-3 overflow-x-auto rounded bg-slate-950 p-4 text-xs leading-6 text-slate-100">
+            <code>{`const { data, error, loading } =
+  useFetch(queryParams, options);`}</code>
+          </pre>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            The component asks for data. The hook handles the fetch work.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Resolve</h2>
+          <pre className="mt-3 overflow-x-auto rounded bg-slate-950 p-4 text-xs leading-6 text-slate-100">
+            <code>{`return {
+  data,
+  error,
+  loading
+};`}</code>
+          </pre>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Now any component can reuse the same loading, error, and data logic.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-5">
+        <h2 className="text-lg font-bold text-slate-950">
+          What This Page Implements
+        </h2>
+        <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-700 md:grid-cols-2">
+          <p>
+            <span className="font-semibold text-slate-950">useFetch:</span>{" "}
+            fetches products, stores loading state, stores errors, and aborts
+            old requests when the URL changes.
+          </p>
+          <p>
+            <span className="font-semibold text-slate-950">useDebounce:</span>{" "}
+            waits before searching, so the API is not called on every single
+            key press.
+          </p>
+          <p>
+            <span className="font-semibold text-slate-950">Search:</span> uses
+            DummyJSON search API with the debounced text.
+          </p>
+          <p>
+            <span className="font-semibold text-slate-950">Pagination:</span>{" "}
+            uses limit and skip to show one page of products at a time.
+          </p>
+        </div>
+      </section>
+
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-950">Products</h1>
+          <h2 className="text-2xl font-bold text-slate-950">Products</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Products fetched with your custom hook.
+            Search, loading skeletons, and pagination are powered by your
+            custom hooks.
           </p>
         </div>
 
