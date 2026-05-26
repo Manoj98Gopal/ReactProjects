@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const useSelect = ({ options, defaultValue, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -6,13 +6,47 @@ const useSelect = ({ options, defaultValue, onChange }) => {
 
   const ref = useRef(null);
 
-  const select = useCallback((option) => {
-    setSelected(option);
-    setIsOpen(false);
-    if (onChange) {
-      onChange(option);
-    }
-  }, [onChange]);
+  // outside click handler
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      removeEventListener("click", handleClickOutside);
+    };
+  }, [ref]);
+
+  // escape key handler
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const select = useCallback(
+    (option) => {
+      setSelected(option);
+      setIsOpen(false);
+      if (onChange) {
+        onChange(option);
+      }
+    },
+    [onChange]
+  );
+
   const getToggleProps = () => ({
     onClick: () => setIsOpen((prev) => !prev),
     "aria-haspopup": "listbox",
