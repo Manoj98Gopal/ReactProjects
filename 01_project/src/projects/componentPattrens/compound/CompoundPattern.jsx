@@ -36,11 +36,93 @@ const accordionData = [
 
 const CompoundPattern = () => {
   return (
-    <div className="mt-6">
-      <h1 className="text-2xl font-bold mb-4">Compound Pattern</h1>
+    <div className="space-y-8 pt-14">
+      <div>
+        <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+          Component Patterns
+        </p>
+        <h1 className="mt-2 text-3xl font-bold text-slate-950">
+          Compound Component Pattern
+        </h1>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          Compound components are multiple small components that work together
+          like one component. The parent manages shared state, and the child
+          components use that state without passing props through every level.
+        </p>
+      </div>
 
-      <div className="flex flex-row gap-12">
-        <div className="flex-1">
+      <section className="grid gap-4 lg:grid-cols-3">
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Problem</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Some UI parts must work together. In an accordion, the trigger opens
+            a panel, and the panel needs to know if it should be visible.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Simple Example</h2>
+          <pre className="mt-3 overflow-x-auto rounded bg-slate-950 p-4 text-xs leading-6 text-slate-100">
+            <code>{`<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger id={1}>
+      Question
+    </Accordion.Trigger>
+    <Accordion.Panel id={1}>
+      Answer
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>`}</code>
+          </pre>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-950">Resolve</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            The parent `Accordion` stores which item is open. `Trigger` changes
+            that value. `Panel` reads that value and shows only when its id is
+            active.
+          </p>
+        </div>
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-2">
+        <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-5">
+          <h2 className="text-lg font-bold text-slate-950">Advantages</h2>
+          <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+            <li>Cleaner JSX because related parts are grouped together.</li>
+            <li>Less prop drilling because shared state comes from context.</li>
+            <li>Flexible layout because users can compose the child components.</li>
+            <li>Reusable API for accordions, tabs, menus, modals, and forms.</li>
+          </ul>
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-5">
+          <h2 className="text-lg font-bold text-slate-950">
+            Where To Use This Pattern
+          </h2>
+          <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+            <li>Accordion: trigger and panel share open or closed state.</li>
+            <li>Tabs: tab buttons and tab panels share active tab state.</li>
+            <li>Dropdown: button, menu, and menu items share open state.</li>
+            <li>Modal: trigger, content, close button, and overlay work together.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold text-slate-950">Live Example</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Both accordions below use the same compound API.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div>
+            <h3 className="mb-3 font-semibold text-slate-950">
+              Pattern Explanation
+            </h3>
           <Accordion>
             <Accordion.Item>
               <Accordion.Trigger id={1}>
@@ -59,7 +141,9 @@ const CompoundPattern = () => {
                 How does the compound pattern work?
               </Accordion.Trigger>
               <Accordion.Panel id={2}>
-                The compound pattern works by creating a parent component that
+                The parent component provides shared state using context. Child
+                components like Trigger and Panel read that shared state and
+                update themselves.
               </Accordion.Panel>
             </Accordion.Item>
             <Accordion.Item>
@@ -67,13 +151,17 @@ const CompoundPattern = () => {
                 What are the benefits of using the compound pattern?
               </Accordion.Trigger>
               <Accordion.Panel id={3}>
-                The compound pattern provides several benefits, including:
+                It makes related components easier to read, easier to reuse, and
+                easier to customize without passing many props manually.
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>
         </div>
 
-        <div className="flex-1">
+          <div>
+            <h3 className="mb-3 font-semibold text-slate-950">
+              React Questions
+            </h3>
           <Accordion>
             {accordionData.map(({ id, title, content }) => (
               <Accordion.Item key={id}>
@@ -84,6 +172,7 @@ const CompoundPattern = () => {
           </Accordion>
         </div>
       </div>
+      </section>
     </div>
   );
 };
