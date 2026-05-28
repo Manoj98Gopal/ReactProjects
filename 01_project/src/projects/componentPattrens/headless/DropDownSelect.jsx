@@ -10,7 +10,6 @@ const DropDownSelect = ({ options, onChange }) => {
     getToggleProps,
     getListProps,
     getOptionProps
-
   } = useSelect({ options, onChange });
 
   return (
