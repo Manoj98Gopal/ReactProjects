@@ -1,7 +1,7 @@
 import useSelect from "./useSelect";
 
 const RadioButton = ({ options, onChange }) => {
-  const { selected, getOptionProps, getListProps, getToggleProps } = useSelect({
+  const { selected, getOptionProps, getListProps } = useSelect({
     options,
     onChange
   });
@@ -10,7 +10,6 @@ const RadioButton = ({ options, onChange }) => {
     <div>
       <ul {...getListProps()} className="space-y-2">
         {options.map((option, idx) => {
-          const isSelected = selected === option;
           return (
             <li
               key={idx}
