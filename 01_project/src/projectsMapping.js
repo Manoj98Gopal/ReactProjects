@@ -2,6 +2,7 @@ import ClosuresAndStaleClosures from "./projects/ClosuresAndStaleClosures";
 import CompoundPattern from "./projects/componentPattrens/compound/CompoundPattern";
 import HeadlessPattern from "./projects/componentPattrens/headless/HeadlessPattern";
 import HOCPattern from "./projects/componentPattrens/hoc/HOCPattern";
+import PolymorphicPattern from "./projects/componentPattrens/polymorphic/PolymorphicPattern";
 import CustomHooks from "./projects/CustomHooks";
 
 export const projectsViews = {
@@ -9,5 +10,6 @@ export const projectsViews = {
   "custom-hooks": CustomHooks,
   "compound-components": CompoundPattern,
   "headless-components": HeadlessPattern,
-  "hoc-components": HOCPattern
+  "hoc-components": HOCPattern,
+  "polymorphic-components": PolymorphicPattern
 };

@@ -45,7 +45,8 @@ const ProjectData = [
           "Create flexible components that can render as different HTML elements.",
         link: "/projects/polymorphic-components"
       }
-    ]
+    ],
+    status: "Implemented"
   }
 ];
 
