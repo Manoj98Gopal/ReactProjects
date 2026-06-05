@@ -24,6 +24,13 @@ const ProjectData = [
     status: "Implemented"
   },
   {
+    title: "Portal Render",
+    description:
+      "Practice rendering UI outside the normal parent DOM tree with React portals.",
+    link: "/projects/portal-render",
+    status: "Ready"
+  },
+  {
     title: "Component Patterns",
     description:
       "Reusable React patterns we are implementing as separate focused examples.",
