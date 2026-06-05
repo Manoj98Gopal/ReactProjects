@@ -17,6 +17,13 @@ const ProjectData = [
     status: "Implemented"
   },
   {
+    title: "Class Component Lifecycle Methods",
+    description:
+      "Learn mounting, updating, and unmounting methods in React class components with a live counter example.",
+    link: "/projects/component-lifecycle-methods",
+    status: "Implemented"
+  },
+  {
     title: "Component Patterns",
     description:
       "Reusable React patterns we are implementing as separate focused examples.",

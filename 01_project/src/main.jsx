@@ -7,7 +7,7 @@ import ErrorFallback from "./projects/componentPattrens/hoc/ErrorBoundryHoc/Erro
 
 const SafeComponent = withErrorBoundary(App, ErrorFallback);
 
-createRoot(document.getElementById("root")).render(<SafeComponent />);
+createRoot(document.getElementById("root")).render(<App />);
 
 //  <StrictMode>
 //     <App />
