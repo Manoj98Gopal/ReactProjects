@@ -2,6 +2,7 @@ import { useState } from "react";
 import User from "./User";
 import BuggyComponent from "./BuggyComponent";
 import ErrorBoundary from "./ErrorBoundary";
+import FallBackUi from "./FallBackUi";
 
 const ComponentLifecycleMethods = () => {
   const [show, setShow] = useState(true);
@@ -56,9 +57,7 @@ const ComponentLifecycleMethods = () => {
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-xl font-bold text-slate-950">
-              Error Boundary
-            </h2>
+            <h2 className="text-xl font-bold text-slate-950">Error Boundary</h2>
             <p className="mt-1 text-sm text-slate-600">
               Trigger a render error to see getDerivedStateFromError and
               componentDidCatch.
@@ -75,7 +74,7 @@ const ComponentLifecycleMethods = () => {
         </div>
 
         <div className="mt-5">
-          <ErrorBoundary key={String(isCrash)}>
+          <ErrorBoundary key={String(isCrash)} fallbackUi={FallBackUi}>
             <BuggyComponent isCrash={isCrash} />
           </ErrorBoundary>
         </div>

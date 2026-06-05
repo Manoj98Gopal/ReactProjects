@@ -28,16 +28,9 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-5">
-          <h2 className="text-lg font-bold text-red-800">
-            Something went wrong
-          </h2>
-          <p className="mt-2 text-sm text-red-700">
-            {this.state.errorMessage}
-          </p>
-        </div>
-      );
+      const FallbackUi = this.props.fallbackUi;
+
+      return <FallbackUi errorMessage={this.state.errorMessage} />;
     }
 
     return this.props.children;
